@@ -8,6 +8,10 @@ app.use(express.static('public/css'));
 // RESTful routes =================================
 app.get('/', (req, res) => {
   res.render('index');
+});
+
+app.get('/blogs', (req, res) => {
+  res.render('blogs');
 })
 
 
