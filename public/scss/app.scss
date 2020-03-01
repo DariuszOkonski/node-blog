@@ -22,7 +22,13 @@ html {
 }
 
 .container {
-  background-color: yellow;
+  // background-color: yellow;
+}
+
+.jumbotron {
+  .fa-file-code {
+    font-size: 3rem;
+  }
 }
 
 .no-gutters>[class*=col-] {
