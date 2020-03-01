@@ -24,3 +24,13 @@ html {
 .container {
   background-color: yellow;
 }
+
+.no-gutters>[class*=col-] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+  }
+}
