@@ -1,19 +1,19 @@
 <%- include('partials/header.ejs') %>
 
 <div class="container mt-4">
-  <h2>ALL Posts</h2>
+  <h2>See all posts</h2>
 
+  <% posts.forEach(post => { %>
   <div class="card mb-3" style="max-width: 100%">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img src="https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_960_720.jpg" class="card-img"
-          alt="...">
+        <img src="<%= post.image %>" class="card-img" alt="...">
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
+          <h5 class="card-title"><%= post.title %></h5>
+          <p class="card-text"><%= post.content.substring(0,50) %>...</p>
+          <p class="card-text"><small class="text-muted"><%= post.created.toDateString() %></small></p>
           <button class="btn btn-sm btn-primary">Read More</button>
           <button class="btn btn-sm btn-secondary">Edit</button>
           <button class="btn btn-sm btn-danger">Delete</button>
@@ -23,6 +23,9 @@
   </div>
 
 
+
+
+  <% }) %>
 </div>
 
 <%- include('partials/footer.ejs') %>
