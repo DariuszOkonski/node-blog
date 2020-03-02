@@ -29,10 +29,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 // RESTful routes =================================
+// display main page
 app.get('/', (req, res) => {
   res.render('index');
 });
 
+// display and add new blog
 app.get('/blogs', (req, res) => {
   Blog.find((err, foundedPosts) => {
     if (err) {
@@ -59,7 +61,20 @@ app.post('/blogs', (req, res) => {
     }
   })
 
-})
+});
+
+// edit selected blog
+app.get('/blogs/:id', (req, res) => {
+  Blog.findById(req.params.id, (err, foundedPost) => {
+    if (err) {
+      res.redirect('/')
+    } else {
+      res.render('show', {
+        post: foundedPost
+      })
+    }
+  });
+});
 
 
 
