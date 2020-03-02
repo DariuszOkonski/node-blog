@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 // MongoDB Configuration ==========================
 mongoose.connect('mongodb://localhost/node_blog', {
@@ -27,6 +28,7 @@ app.use(express.static('public/css'));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(methodOverride('_method'));
 
 // RESTful routes =================================
 // display main page
@@ -63,7 +65,7 @@ app.post('/blogs', (req, res) => {
 
 });
 
-// edit selected blog
+// show selected blog
 app.get('/blogs/:id', (req, res) => {
   Blog.findById(req.params.id, (err, foundedPost) => {
     if (err) {
@@ -72,6 +74,29 @@ app.get('/blogs/:id', (req, res) => {
       res.render('show', {
         post: foundedPost
       })
+    }
+  });
+});
+
+// edit selected blog
+app.get('/blogs/:id/edit', (req, res) => {
+  Blog.findById(req.params.id, (err, foundedPost) => {
+    if (err) {
+      res.redirect('/');
+    } else {
+      res.render('edit', {
+        blog: foundedPost
+      })
+    }
+  });
+});
+
+app.put('/blogs/:id', (req, res) => {
+  Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedPost) => {
+    if (err) {
+      res.redirect('/');
+    } else {
+      res.redirect('/blogs');
     }
   });
 });
