@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 // MongoDB Configuration ==========================
 mongoose.connect('mongodb://localhost/node_blog', {
@@ -23,6 +24,9 @@ const Blog = mongoose.model('Blog', blogSchema);
 // Configuration ==================================
 app.set('view engine', 'ejs');
 app.use(express.static('public/css'));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // RESTful routes =================================
 app.get('/', (req, res) => {
@@ -47,9 +51,14 @@ app.get('/blogs/new', (req, res) => {
 });
 
 app.post('/blogs', (req, res) => {
-  console.log(req.body.blog);
+  Blog.create(req.body.blog, (err, blog) => {
+    if (err) {
+      res.redirect('/');
+    } else {
+      res.redirect('/blogs');
+    }
+  })
 
-  res.render('blogs');
 })
 
 
