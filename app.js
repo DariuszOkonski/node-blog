@@ -90,6 +90,18 @@ app.put('/blogs/:id', (req, res) => {
   });
 });
 
+// delete selected blog
+
+app.delete('/blogs/:id', (req, res) => {
+  Blog.findByIdAndRemove(req.params.id, (err, result) => {
+    if (err) {
+      res.redirect('/blogs');
+    } else {
+      res.redirect('/blogs');
+    }
+  });
+});
+
 
 
 
