@@ -12,7 +12,10 @@
 
       <a class="btn btn-success btn-sm" href="/blogs">Back</a>
       <a class="btn btn-primary btn-sm" href="/blogs/<%= post._id %>/edit">Edit</a>
-      <a class="btn btn-danger btn-sm" href="/">Delete</a>
+
+      <form id="delete" action="/blogs/<%= post._id %>?_method=DELETE" method="POST">
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+      </form>
     </div>
   </div>
 </div>
