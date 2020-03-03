@@ -3,24 +3,13 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const Blog = require('./models/blog.jsx');
 
 // MongoDB Configuration ==========================
 mongoose.connect('mongodb://localhost/node_blog', {
   useUnifiedTopology: true,
   useNewUrlParser: true
 });
-
-const blogSchema = new mongoose.Schema({
-  title: String,
-  image: String,
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  content: String,
-});
-
-const Blog = mongoose.model('Blog', blogSchema);
 
 // Configuration ==================================
 app.set('view engine', 'ejs');
