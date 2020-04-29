@@ -8,7 +8,8 @@ const Blog = require('./models/blog.jsx');
 // MongoDB Configuration ==========================
 mongoose.connect('mongodb://localhost/node_blog', {
   useUnifiedTopology: true,
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useFindAndModify: false
 });
 
 // Configuration ==================================
